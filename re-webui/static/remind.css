@@ -1,0 +1,91 @@
+
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+    background: #222;
+  }
+
+.sidenav {
+  height: 98%;
+  width: 260px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 0px;
+  margin-left: 0px; 
+  margin-top: 0px;
+  font-size: 24px;
+  color: white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+.minigraph {
+    height: 20%;
+  width: 260px;
+  position: fixed;
+  z-index: 1;
+  top: 100px;
+  left: 260px;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 24px;
+  color: white;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.cfg .node rect {
+    stroke-width: 1.5px;
+    stroke: #bbb;
+    fill: #666;
+  }
+
+.cfg .edgePath path {
+  stroke: #999;
+  fill: #999;
+  stroke-width: 1.5px;
+}
+
+.mainw {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    margin-left: 260px;
+    font-size: 26px;
+    color: white;
+}
+
+
+.choice {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    margin-left: 260px;
+    font-size: 26px;
+    color: white;
+}
+
+.asm_links a {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  margin-left: 20px; 
+  font-size: 18px;
+  color: white;
+}
+
+
+svg {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    overflow: hidden;
+  }

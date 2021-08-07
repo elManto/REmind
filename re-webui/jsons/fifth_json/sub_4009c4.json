@@ -1,0 +1,1 @@
+{"sub_4009c4_bbs": {"0x4009c4": "0x4009c4: sub rsp, 8\n0x4009c8: add rsp, 8\n0x4009cc: ret \n"}, "sub_4009c4_edges": {"edges": []}}

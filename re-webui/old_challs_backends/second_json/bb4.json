@@ -1,0 +1,1 @@
+{"bb4_bbs": {"0x400cb4": "push ebp\nxor esp, esp\nadd esp, 0x20\npop esp\nxor eax, eax\nadd eax, 0xf\n"}}

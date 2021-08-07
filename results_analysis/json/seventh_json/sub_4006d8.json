@@ -1,0 +1,1 @@
+{"sub_4006d8_edges": {"edges": [["0x4006d8", "0x4006ea"], ["0x4006d8", "0x4006e8"], ["0x4006e8", "0x4006ea"]]}, "sub_4006d8_bbs": {"0x4006ea": "0x4006ea: add rsp, 8\n0x4006ee: ret \n", "0x4006e8": "0x4006e8: call rax\n", "0x4006d8": "0x4006d8: sub rsp, 8\n0x4006dc: mov rax, qword ptr [rip + 0x201905]\n0x4006e3: test rax, rax\n0x4006e6: je 0x4006ea\n"}}

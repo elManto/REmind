@@ -1,0 +1,1 @@
+{"bb3_bbs": {"0x400cb0": "lea edx, [esi + ecx + 0x2c]\npush eax\nlea eax, [ebx - 0x2f20\npush eax\npush edx\ncall 0x00805262", "0x400cb2":"shl eax, 3\nmov ecx, edx\nadd eax, 1\nlea eax, [esi + 0x2c]\ninc ecx\nxor eax, eax\ntest eax, eax", "0x400cb4": "add esp, 0x10\nsub esp, 0x4\nmov dword [local_34h], eax\nxor ebx, ebx\ncmp dword [local_34h], ebx\njne 0x00800982\n"}}

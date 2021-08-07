@@ -1,0 +1,1 @@
+{"bb3_bbs": {"0x400cb4": "add esp, 0x10\nsub esp, 0x4\nmov dword [local_34h], eax\nxor ebx, ebx\ncmp dword [local_34h], ebx\njne 0x00800982\n"}}

@@ -1,0 +1,1 @@
+{"malloc_bbs": {"0x400730": "0x400730: jmp qword ptr [rip + 0x20187a]\n"}, "malloc_edges": {"edges": []}}

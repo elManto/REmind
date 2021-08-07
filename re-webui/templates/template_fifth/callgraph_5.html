@@ -1,0 +1,195 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Re-Mind Demo</title>
+
+<link href="{{url_for('static', filename='prism.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='remind.css') }}" rel="stylesheet" />
+
+<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="{{url_for('static', filename='node_modules/dagre-d3/dist/dagre-d3.js') }}"></script>
+
+
+<!-- jQuery -->
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.scrollTo.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.layout-latest.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery-ui.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.ui-contextmenu.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.onoff.min.js' ) }}"></script>
+
+
+<!-- my scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'globalVariables.js') }}"></script>
+
+<script>
+	current_chall = 'fifth_chall';
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'requestsUtils.js') }}"></script><script type="text/javascript" src="{{ url_for('static', filename = 'utils.js') }}"></script>
+<style>
+
+
+<style>
+
+
+.cfgbutton {
+    background-color: transparent;
+    background:url("{{url_for('static', filename='./gear.png')}}") no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding-left: 50px;
+    vertical-align: middle;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #414141; color:white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+</style>
+
+<body>
+
+  <div class="sidenav" onmouseover="selected(null);">
+   <div class="dropdown">
+      &nbsp;&#9776;&nbsp;Functions
+      <div class="dropdown-content" style="left: 10px;">
+       <a href="{{ url_for('fifth_chall.info') }}">Info</a>
+       <a href="{{ url_for('fifth_chall.strings') }}">Strings</a>
+       <a href="{{ url_for('fifth_chall.callgraph') }}">Callgraph</a>
+          <a href="/fifth_chall/?function=_init">[ CFG ]</a>
+    </div>
+   </div>
+
+   <br/><br/>
+      {% for f in session['functions'] %}
+   <a id="{{ f }}" href="#" onclick="reach('{{ f }}')">{{ f }}</a>
+      {% endfor %}
+
+  </div>
+
+  <div class="dropdown" style="float:right;">
+      <button class="cfgbutton"></button>
+      <div class="dropdown-content">
+       <a href="{{ url_for('rev_webui.index') }}">Pause</a>
+       <a href="#">Submit Solution</a>
+       <a href="#">Configure</a>
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+  </div>
+  </div>
+
+  <div class="mainw">
+      <br/>
+<hr style="height:2px;border:none;color:#333;background-color:#333;" />
+  <br/>
+
+  <div class="cfg">
+     <svg>
+
+     </svg>
+  </div>
+  </div>
+
+</body>
+
+
+<script id="js">
+
+function getAddressByFunctionName(name) {
+    for(var i in callgraph) {
+        if(name == callgraph[i]["label"]) {
+            return i;
+        }
+    }
+    return 0;
+}
+
+function reach(funcName){
+ var name = getAddressByFunctionName(funcName);
+ if (name == 0) {
+    return;
+ }
+ rect = call_g._nodes[name].elem.firstChild;
+ rect.style["strokeWidth"]="12.5px";
+ rect.style["stroke"]="#b33";
+ x = call_g._nodes[name].x;
+ y = call_g._nodes[name].y;
+ z = d3.zoomTransform(d3.select("svg").node()).k
+ d3.select('svg').transition().duration(400).call( call_zoom.transform, d3.zoomIdentity.translate(-1*x+200,-1*y+200).scale(1) );
+}
+
+function sr(r){
+  window.selected_reg = r;
+  emphasize_reg();
+  Prism.highlightAll();
+}
+
+
+function emphasize_reg() {
+    var list = document.getElementsByTagName("code");
+    for (let i = 0; i < list.length; i++) {
+      var value = cfg[list[i].id];
+      var tmp = value.asm.split('\n');
+      var tmp2 = value.obfuscated.split('\n');
+      new_value = ""
+      for (let i = 0; i < tmp.length; i++) {
+         if (tmp[i].includes(window.selected_reg)){
+           new_value += tmp[i] + '\n';
+         }
+         else{
+           new_value += tmp2[i] + '\n';
+         }
+      }
+      list[i].textContent = new_value;
+    }
+
+   window.focused_bb.textContent = cfg[window.focused_bb.id].asm;
+   Prism.highlightElement(window.focused_bb);
+}
+
+
+class Function {
+  constructor(address, name, nodes, edges){
+     this.address = address;
+     this.name    = name;
+     this.nodes   = nodes;
+     this.edges   = edges;
+  }
+}
+
+
+
+downloadCallGraph();
+
+
+
+
+
+</script>
+
+<script src="{{ url_for('static', filename='prism2.js')}}"></script>
+
+</html>

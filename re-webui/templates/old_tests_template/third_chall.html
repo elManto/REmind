@@ -1,0 +1,215 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Re-Mind Demo</title>
+
+<link href="{{url_for('static', filename='prism.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='remind.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='third_chall.css') }}" rel="stylesheet" />
+
+<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="{{url_for('static', filename='node_modules/dagre-d3/dist/dagre-d3.js') }}"></script>
+
+<!-- python interpreter -->
+<script src="http://www.skulpt.org/static/skulpt.min.js" type="text/javascript"></script>
+<script src="http://www.skulpt.org/static/skulpt-stdlib.js" type="text/javascript"></script>
+
+
+<!-- jQuery -->
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.scrollTo.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.layout-latest.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery-ui.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.ui-contextmenu.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.onoff.min.js' ) }}"></script>
+
+
+
+<!-- my scripts -->
+	<script type="text/javascript" src="{{ url_for('static', filename = 'globalVariables.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'third_chall.js') }}"></script>
+
+<style>
+#output {
+    margin-left:10px;
+    margin-right:10px;
+    position:relative;
+    top: 700px;
+}
+
+.notes {
+  display:none;
+  float:right;
+  height: 100%;
+  width: 350px;
+  position: fixed;
+  z-index: 0;
+  top: 100px;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-left: 0px;
+  margin-top: 0px;
+  font-size: 24px;
+  color: white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+.py {
+  display:none;
+  float:right;
+  height: 100%;
+  width: 350px;
+  position: fixed;
+  z-index: 0;
+  top: 100px;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-left: 0px;
+  margin-top: 0px;
+  font-size: 24px;
+  color: white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+
+textarea{
+    background-color: black;
+    color:white;
+}
+
+
+button {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    background: red;
+    border: 0;
+    width: 150px;
+    height: 40px;
+    border-radius: 3px;
+    color: yellow;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.cfgbutton {
+    background-color: transparent;
+    background:url("{{url_for('static', filename='./gear.png')}}") no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding-left: 50px;
+    vertical-align: middle;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.butt1 {
+    position:absolute;
+    margin-top:250px;
+}
+
+
+.my_form {
+    position:absolute;
+    margin-top:320px;
+}
+
+
+.butt2 {
+    position:absolute;
+    margin-top:390px;
+}
+
+.dropdown-content a:hover {background-color: #414141; color:white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+</style>
+
+<body>
+
+<div class="sidenav2">
+    <h1 style="color:white">Which is the final value of the rbx register?</h1>
+        <p style="color:red">When you find the result, click a random key from you keyboard or click with your mouse to submit</p>
+
+
+    {% if not session['speed_solved'] %}
+<button class="butt1" onclick="start_test();">Start</button><br><br>
+    <!-- <input class="my_form" id='sol' name='token' placeholder='Which is the final value of the rbx register?' type='text'><br><br>
+    <button class="butt2" onclick="send_submission()">Submit</button> -->
+    {% endif %}
+
+   </div>
+
+  <div class="dropdown" style="float:right;">
+      <button class="cfgbutton"></button>
+      <div class="dropdown-content">
+       <a href="{{ url_for('rev_webui.index') }}">Pause</a>
+       <a href="{{ url_for('auth.logout') }}">Logout</a>
+  </div>
+
+  </div>
+
+
+  <div class="mainw">
+
+      <br/>
+<hr style="height:2px;border:none;color:#333;background-color:#333;" />
+  <br/>
+    {% if session['speed_solved'] %}
+      <p>Awesome! Go on with the other <a href="{{ url_for('rev_webui.index') }}">tasks</a></p>
+    {% endif %}
+
+  <div class="cfg">
+     <svg>
+
+     </svg>
+  </div>
+  </div>
+
+</body>
+
+
+{% if not session['speed_solved'] %}
+<script id="js">
+
+var id = '{{ session['tmp_token'] }}';
+block_to_download = "sub_400cb4"
+downloadCFG(block_to_download);
+
+document.onkeydown = function(evt) {
+    $('pre')[0].style.display = "none"
+    setTimeout(send_submission, 1000)
+}
+</script>
+{% endif %}
+
+<script src="{{ url_for('static', filename='prism3_second_chall.js')}}"></script>
+
+</html>

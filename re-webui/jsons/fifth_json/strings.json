@@ -1,0 +1,1 @@
+{"0x9da": [{"xref": ["sub_40088c", "sub_40088c"]}, {"str": "Congratulations"}, {"addr": ["0x40090e", "0x400934"]}, {"opcode": ["lea rdi, str.Congratulations", "lea rdi, str.Congratulations"]}], "0x9d4": [{"xref": ["sub_40088c", "sub_40088c"]}, {"str": "Wrong"}, {"addr": ["0x4008ba", "0x40091e"]}, {"opcode": ["lea rdi, str.Wrong", "lea rdi, str.Wrong"]}]}

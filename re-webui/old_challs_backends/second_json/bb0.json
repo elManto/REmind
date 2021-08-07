@@ -1,0 +1,1 @@
+{"bb0_bbs": {"0x400cb4": "add ebx, 0x10\nmov eax, dword [esp]\nsub ebx, 0x10\nadd eax, 0xf\nmov ebx, dword [esp]\ntest ebx, ebx\njne 0x00804098"}}

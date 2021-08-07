@@ -1,0 +1,42 @@
+<html>
+        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+
+
+        <title>Remind</title>
+<body>
+<div class='register'>
+  <h2>Registration</h2>
+  <br><br>
+  <center>
+   <form method="post">
+     <div>Self evaluation of reversing skills</div><br>
+     <div>How much often do you reverse?</div><br>
+    </center>
+    <div style="margin-left:100px">
+        <input type="radio" name="level" value="1" /> Never<br>
+        <input type="radio" name="level" value="2" /> Sometimes<br>
+        <input type="radio" name="level" value="3" /> Often<br>
+        <input type="radio" name="level" value="4" /> Usually<br>
+    </div>
+ 	{% if session['experiment_mode'] == 0 %}
+    	<center>
+	    <br><br><div>First Name*:</div>
+	    <input type="text" name="first"><br>
+	    <br><br><div>Last Name*:</div><br>
+	    <input type="text" name="last"><br>
+	    <br><br><div>(*) Only for Students</div><br>
+	</center>
+    	{% endif %}
+        <center>
+        <br><br>
+        <input type="submit" value="Register">
+    </center>
+
+
+  </form>
+
+   <a class='forgot' href="{{ url_for('auth.login') }}">Go to login</a>
+</div>
+
+</body>
+</html>

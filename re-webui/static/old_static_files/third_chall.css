@@ -1,0 +1,35 @@
+
+
+input[type="text"], input[type="password"] {
+  width: 250px;
+  height: 40px;
+  padding: 25px 0px;
+  background: yellow;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  outline: none;
+  color: #46485c;
+}
+input[type=checkbox] {
+  display: none;
+}
+
+input {
+    text-align: center;
+}
+
+
+
+
+input[type="submit"] {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  background: red;
+  border: 0;
+  width: 250px;
+  height: 40px;
+  border-radius: 3px;
+  color: yellow;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+

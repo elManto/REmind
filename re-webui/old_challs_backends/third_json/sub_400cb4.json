@@ -1,0 +1,1 @@
+{"sub_400cb4_bbs": {"0x400cb4": "mov rax, 0x10\npush rax\nmov rbx, 0x2\ninc rbx\nmov rax, rbx\nmov rcx, dword [esp]\nadd rax, rcx"}}

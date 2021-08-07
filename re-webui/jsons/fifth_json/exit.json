@@ -1,0 +1,1 @@
+{"exit_edges": {"edges": []}, "exit_bbs": {"0x400660": "0x400660: jmp qword ptr [rip + 0x20096a]\n"}}

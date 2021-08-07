@@ -1,0 +1,522 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Re-Mind Demo</title>
+
+<link href="{{url_for('static', filename='prism.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='remind.css') }}" rel="stylesheet" />
+
+<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="{{url_for('static', filename='node_modules/dagre-d3/dist/dagre-d3.js') }}"></script>
+
+<!-- python interpreter -->
+<script src="http://www.skulpt.org/static/skulpt.min.js" type="text/javascript"></script>
+<script src="http://www.skulpt.org/static/skulpt-stdlib.js" type="text/javascript"></script>
+
+
+<!-- jQuery -->
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.scrollTo.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.layout-latest.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery-ui.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.ui-contextmenu.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.onoff.min.js' ) }}"></script>
+
+<!-- context menu -->
+<script defer src="{{ url_for('static', filename = 'menu.js-master/dist/menu.js') }}"></script>
+
+
+{% if session['obfuscation_4'] %}
+<script>
+function obfuscate(id) {
+   for(var index in spanIds) {
+        $('span#' + spanIds[index] + '.token.generic').css('filter', 'blur(8px)')
+    }
+    localStorage.setItem("addr", id)
+    $("code#" + id + " span.token.generic").css("filter", "");
+    $('.token.generic').css("background", "");
+ 
+    spanIds = [];
+    if(previousBBid != 0 && previousBBid != id) {
+        $("code#" + previousBBid +" span.token.generic").css("filter", "blur(8px)");
+    }
+    previousBBid = id;
+}
+</script>
+{% else %}
+<script>
+function obfuscate(id) {
+    localStorage.setItem("addr", id)
+    $("code#" + id + " span.token.generic").css("filter", "");
+    $('.token.generic').css("background", "");
+    previousBBid = id;
+}
+</script>
+{% endif %}
+
+
+<!-- my scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'globalVariables.js') }}"></script>
+
+<script>
+		current_chall = 'fourth_chall';
+</script>
+
+	<script type="text/javascript" src="{{ url_for('static', filename = 'requestsUtils.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'utils.js') }}"></script>
+<style>
+#output {
+    margin-left:10px;
+    margin-right:10px;
+    position:relative;
+    top: 600px;
+}
+
+.notes {
+  display:none;
+  float:right;
+  height: 100%;
+  width: 350px;
+  position: fixed;
+  z-index: 0;
+  top: 100px;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-left: 0px;
+  margin-top: 0px;
+  font-size: 24px;
+  color: white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+.py {
+  display:none;
+  float:right;
+  height: 100%;
+  width: 350px;
+  position: fixed;
+  z-index: 0;
+  top: 80px;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-left: 0px;
+  margin-top: 0px;
+  font-size: 24px;
+  color: white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+
+textarea{
+    background-color: black;
+    color:white;
+}
+
+
+button {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    background: red;
+    border: 0;
+    width: 150px;
+    height: 40px;
+    border-radius: 3px;
+    color: yellow;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.cfgbutton {
+    background-color: transparent; 
+    background:url("{{url_for('static', filename='./gear.png')}}") no-repeat;
+    border: none;           
+    cursor: pointer;        
+    height: 50px;           
+    padding-left: 50px;     
+    vertical-align: middle; 
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #414141; color:white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+</style>
+
+<body>
+
+  <div class="sidenav" onmouseover="selected(null);">
+   <div class="dropdown" style="position:fixed;background:black;">
+      &nbsp;&nbsp;&#9776;&nbsp;Functions &nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="dropdown-content" style="left: 10px;">
+       <a href="{{ url_for('fourth_chall.info') }}">Info</a>
+       <a href="{{ url_for('fourth_chall.strings') }}">Strings</a>
+       <a href="{{ url_for('fourth_chall.callgraph') }}">Callgraph</a>
+          <a href="/fourth_chall/?function=_init">[ CFG ]</a>
+    </div>
+   </div>
+
+   <br/><br/>
+      {% for key in session['functions'] %}
+       <a id="{{ key }}" class="{{ key }} token" href="./?function={{ key }}" onclick="push_function_history(null, null)">{{ session['functions'][key] }}</a>
+      {% endfor %}
+
+  </div>
+
+  <div class="dropdown" style="float:right;">
+      <button class="cfgbutton"></button>
+      <div class="dropdown-content">
+       <a href="{{ url_for('rev_webui.index') }}">Pause</a>
+       <a href="{{ url_for('fourth_chall.confirm_solution') }}">Submit Solution</a>
+
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+      </div>
+
+  </div>
+  <div class="py">
+          <form class="py">
+            <textarea id="yourcode" cols="40" rows="35"># Write here your python code snippets!
+</textarea><br />
+            <button type="button" onclick="runit()">Run</button>
+          </form>
+            <pre id="output" style="color:yellow;background:green">Output...
+            </pre>
+      </div>
+  <div class="notes">
+          <form class="notes">
+            <textarea id="notes_area" cols="40" rows="42"></textarea><br />
+            <button type="button" onclick="storeit()">Save your notes</button>
+          </form>
+            </div>
+
+  <div class="mainw">
+      <br/>
+<hr style="height:2px;border:none;color:#333;background-color:#333;" />
+  <br/>
+
+  <div class="cfg">
+     <svg>
+
+     </svg>
+  </div>
+  </div>
+
+</body>
+
+
+<script id="js">
+localStorage.setItem("lastChallId", "fourth_chall")
+
+function storeit() {
+    var note = document.getElementById("notes_area").value;
+    $.post(base_url + "/fourth_chall/storeNotes", data={'token':id, 'notes':note})
+    alert("Your notes have been saved!")
+}
+
+
+function outf(text) {
+    var mypre = document.getElementById("output");
+    mypre.innerHTML = mypre.innerHTML + text;
+}
+
+
+function builtinRead(x) {
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+            throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+}
+
+// Here's everything you need to run a python program in skulpt
+// grab the code from your textarea
+// get a reference to your pre element for output
+// configure the output function
+// call Sk.importMainWithBody()
+function runit() {
+   var prog = document.getElementById("yourcode").value;
+   var mypre = document.getElementById("output");
+   mypre.innerHTML = '';
+   Sk.pre = "output";
+   Sk.configure({output:outf, read:builtinRead});
+   //(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
+   var myPromise = Sk.misceval.asyncToPromise(function() {
+       return Sk.importMainWithBody("<stdin>", false, prog, true);
+   });
+   myPromise.then(function(mod) {
+       console.log('success');
+   },
+       function(err) {
+       console.log(err.toString());
+   });
+}
+
+
+var id = '{{ session['tmp_token'] }}';
+var addr_to_zoom = '{{ session['addr'] }}'
+var func_to_download = '{{ session['function_name'] }}';
+var all_the_functions_str = '{{ session['functions'] }}';
+all_the_functions_str = all_the_functions_str.split("&#39;");
+var all_the_functions = []
+var all_the_functions_dict = {}
+for(var i = 1; i < all_the_functions_str.length; i+=4) {
+        if(!(all_the_functions_str[i] == '[' || all_the_functions_str[i] == ']' || all_the_functions_str[i] == ', ' || all_the_functions_str[i] == '{' || all_the_functions_str[i] == '}' || all_the_functions_str[i] == ': ' )) {
+                key = all_the_functions_str[i+2];       // new name is key
+                val = all_the_functions_str[i];         // old name is value
+                if (!(all_the_functions.includes(val))) {
+                        if (key == val)
+                                all_the_functions.push(val)
+                        else {
+                                all_the_functions.push(val)
+                                all_the_functions.push(key)
+                        }
+                }
+
+                all_the_functions_dict[key] = val
+        }
+}
+
+localStorage.setItem("function", func_to_download);
+
+function sr(r){
+  window.selected_reg = r;
+  emphasize_reg();
+  Prism.highlightAll();
+}
+
+
+function emphasize_reg() {
+    var list = document.getElementsByTagName("code");
+    for (let i = 0; i < list.length; i++) {
+      var value = cfg[list[i].id];
+      var tmp = value.asm.split('\n');
+      var tmp2 = value.obfuscated.split('\n');
+      new_value = ""
+      for (let i = 0; i < tmp.length; i++) {
+         if (tmp[i].includes(window.selected_reg)){
+           new_value += tmp[i] + '\n';
+         }
+         else{
+           new_value += tmp2[i] + '\n';
+         }
+      }
+      list[i].textContent = new_value;
+    }
+
+   window.focused_bb.textContent = cfg[window.focused_bb.id].asm;
+   Prism.highlightElement(window.focused_bb);
+}
+
+
+class Function {
+  constructor(address, name, nodes, edges){
+     this.address = address;
+     this.name    = name;
+     this.nodes   = nodes;
+     this.edges   = edges;
+  }
+}
+
+
+downloadCFG(func_to_download);
+
+
+function change_page() {
+        if (relocate == 1) {
+                relocate = 0
+                coord = pop_function_history()
+                if (coord == null)
+                        return
+                foo = coord[0]
+                addr = coord[1]
+                new_url =  base_url + '/fourth_chall/?function=' + foo;
+                if (addr != null)
+                        new_url += '&&addr=' + addr
+                window.location.href = new_url;
+        }
+}
+
+
+// context menu
+let menuContent = [
+    {title: "Variable Rename", name: "rename"},
+    {title: "Function Rename", name: "function"},
+    {title: "Jump to", name: "jumpto"},
+    {title: "Add comment", name: "comment"},
+    {title: "Follow this", name: "follow"}
+];
+
+//context menu handler
+function itemClick (name) {
+	switch(name) {
+		case "rename":
+			console.log(globalEvent[0]);
+			rename(globalEvent[0]);
+			break;
+		case "jumpto":
+			var r = prompt("insert address");
+			if(r == "")	return;
+			scrollToAddress(r, scrollEventsEnum.JUMPTO);
+			break;
+
+		case "comment":
+			var codeId = globalEvent[2].id;
+			var tokenAddress = globalEvent[1];
+                        if (codeId == "") {
+                                var addrId = globalEvent[0].id;
+                                tokenAddress = $('span#' + addrId + '.token.generic')[0].parentElement; 
+                                // codeId = globalEvent[1].id;
+                                codeId = cfg_getBBbyAddress(addrId);
+                        }
+                        else if (globalEvent[1].classList.contains("register") && globalEvent[1].classList.contains("variable")) {
+                                var addrId = globalEvent[0].id;
+                                tokenAddress = $('span#' + addrId + '.token.generic')[0].parentElement;                 
+                        }
+			cfg_comment(codeId, tokenAddress);
+			break;
+
+		case "follow":
+			var addr = globalEvent[0].innerHTML;
+			ex_addr = globalEvent[0].id;
+			follow(addr, ex_addr, scrollEventsEnum.FOLLOW);
+			obfuscate(destination);
+			break;
+
+		case "function":
+		    var id = globalEvent[0].id;
+		    console.log(globalEvent);
+		    var res = $('span#' + id + '.token.generic:contains("call")')
+            if(res.length > 0) {
+                rename_func(id);
+            }
+		    else if(globalEvent[0].className == id + " token") {
+		        rename_sidenav_func(globalEvent[0])
+		    }
+		    else
+		        console.log("no rename")
+
+		default:
+			break;
+
+	}
+}
+
+// keyboard handler
+document.onkeydown = function(evt) {
+
+    if(document.activeElement.id == 'yourcode' || document.activeElement.id == 'notes_area')
+        return;
+    evt = evt || window.event;
+    var isEscape = false;
+    if ("key" in evt) {
+        isEscape = (evt.key == "Escape" || evt.key == "Esc");
+    } else {
+        isEscape = (evt.keyCode == 27);
+    }
+   if (isEscape) {
+        if (myHistory) {
+            scrollToAddress(myHistory, scrollEventsEnum.ESC);
+            obfuscate(destination);
+            myHistory = null;
+            return;
+        }
+        if (localStorage.getItem("myFunctionHistory") != 0) {
+                relocate = 1;
+                setTimeout(change_page, 50);
+                return;
+        }
+
+        window.selected_reg='x_x_x';
+    } 
+    if (evt.key == 'c') {
+        codeId = getBBbyAddress(eip);
+        cfg_comment(codeId, exEipElement[0]);
+    }
+    if (evt.key == 'r') {
+        id = exEipElement.children()[0].id;
+        var elemToRename;
+        $('span#' + id + '.token.generic').each(function() {
+            if($(this).parent()[0].className == "token local") {
+                elemToRename = $(this)[0]
+                return;
+            }
+        });
+        if (elemToRename) {
+            rename(elemToRename);
+        }
+        else
+            alert("no local variables to rename");
+    }
+    if(evt.key == 'p') {
+        if($('.py').css('display') == 'block')
+            $('.py').hide();
+        else {
+            $('.notes').hide();
+            $('.py').show();
+        }
+    }
+    if(evt.key == 'n') {
+        if($('.notes').css('display') == 'block')
+            $('.notes').hide();
+        else {
+            $('.py').hide();
+            $('.notes').show();
+            $.post(base_url + "/fourth_chall/downloadNotes", data={'token':id}, function(data) {
+                document.getElementById("notes_area").value = data;
+
+            });
+        }
+    }
+
+
+};
+
+function change_page() {
+        if (relocate == 1) {
+                relocate = 0
+                coord = pop_function_history()
+                if (coord == null)
+                        return
+                foo = coord[0]
+                addr = coord[1]
+                new_url =  base_url + '/fourth_chall/?function=' + foo;
+                if (addr != null)
+                        new_url += '&&addr=' + addr
+                window.location.href = new_url;
+        }
+}
+	
+</script>
+
+{% if session['obfuscation_4'] %}
+<script src="{{ url_for('static', filename='prism2.js')}}"></script>
+{% else %}
+<script src="{{ url_for('static', filename='prism2_no_obfuscation.js')}}"></script>
+{% endif %}
+<script type="text/javascript" src={{url_for('static', filename='./jqueryEventsUtils.js')}}></script>
+</html>

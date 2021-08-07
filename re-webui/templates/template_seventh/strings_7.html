@@ -1,0 +1,133 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Re-Mind Demo</title>
+
+<link href="{{url_for('static', filename='prism.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='remind.css') }}" rel="stylesheet" />
+
+<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="{{url_for('static', filename='node_modules/dagre-d3/dist/dagre-d3.js') }}"></script>
+
+
+<!-- jQuery -->
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.scrollTo.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.layout-latest.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery-ui.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.ui-contextmenu.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.onoff.min.js' ) }}"></script>
+
+<!-- context menu -->
+<script defer src="{{ url_for('static', filename = 'menu.js-master/dist/menu.js') }}"></script>
+
+<style>
+
+
+.cfgbutton {
+    background-color: transparent;
+    background:url("{{url_for('static', filename='./gear.png')}}") no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding-left: 50px;
+    vertical-align: middle;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #414141; color:white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.strings {
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+</style>
+
+<body>
+
+  <div class="sidenav" onmouseover="selected(null);">
+   <div class="dropdown">
+      &nbsp;&#9776;&nbsp;Functions
+      <div class="dropdown-content" style="left: 10px;">
+       <a href="{{ url_for('seventh_chall.info') }}">Info</a>
+       <a href="{{ url_for('seventh_chall.strings') }}">Strings</a>
+       <a href="{{ url_for('seventh_chall.callgraph') }}">Callgraph</a>
+          <a href="/seventh_chall/?function=_init">[ CFG ]</a>
+    </div>
+   </div>
+
+   <br/><br/>
+   {% for f in session['functions'] %}
+   <a href="./?function={{ f }}">{{ session['functions'][f] }}</a>
+      {% endfor %}
+  </div>
+
+  <div class="dropdown" style="float:right;">
+      <button class="cfgbutton"></button>
+      <div class="dropdown-content">
+       <a href="{{ url_for('rev_webui.index') }}">Pause</a>
+       <a href="#">Submit Solution</a>
+       <a href="#">Configure</a>
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+  </div>
+  </div>
+
+  <div class="mainw">
+      <br/>
+<hr style="height:2px;border:none;color:#333;background-color:#333;" />
+  <br/>
+  <div class="strings">
+
+
+
+        <ul>
+            {% for key in session['strings'] %}
+            <li><span>{{ key }}</span>&nbsp&nbsp&nbsp&nbsp<span>{{ session['strings'][key][1]['str'] }}</span>&nbsp&nbsp&nbsp&nbsp
+                    {% if session['strings'][key][0]['xref'] != "[]" %}
+                        {% for xref in session['strings'][key][0]['xref'] %}
+                            <span><a href="./?function={{ xref }}&&addr={{ session['strings'][key][2]['addr'][0] }}">{{ session['functions'][xref] }}</a></span>
+                        {% endfor %}
+                        </li>
+                    {% else %}
+                        </li>
+                    {% endif %}
+            {% endfor %}
+
+        </ul>
+
+  </div>
+  </div>
+
+</body>
+
+
+</html>

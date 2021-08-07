@@ -1,0 +1,73 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Re-Mind Demo</title>
+
+<link href="{{url_for('static', filename='prism.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='remind.css') }}" rel="stylesheet" />
+
+<style>
+
+.cfgbutton {
+    background-color: transparent;
+    background:url("{{url_for('static', filename='./gear.png')}}") no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding-left: 50px;
+    vertical-align: middle;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #414141; color:white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+<body>
+
+    <div class="dropdown" style="float:right;">
+      <button class="cfgbutton"></button>
+      <div class="dropdown-content">
+       <a href="auth/logout">Logout</a>
+  </div>
+  </div>
+
+  <div class="mainw">
+      <br/>
+      <div class="asm_links"><h1> Welcome! </h1> </div>
+<hr style="height:2px;border:none;color:#333;background-color:#333;" />
+  <br/>
+ </div>
+ <div class="choice">
+
+     <h1>Wrong!!! Retry<br>
+        </h1>
+
+
+
+</body>
+
+
+</html>

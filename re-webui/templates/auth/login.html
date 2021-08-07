@@ -1,0 +1,34 @@
+<html>
+        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+        <script type="text/javascript" src="{{ url_for('static', filename='login.js') }}"></script>
+
+        <title>Remind</title>
+<body>
+
+<div class='login'>
+  <h2>Sign in</h2>
+  <center>
+  <section class="content">
+  {% if session['just_logged'] %}
+    <div><br> Here your subscription token <br><b>{{ session['token'] }}</b><br></div>
+    {% endif %}
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <br><div class="flash">{{ message }}</div><br>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
+    </center>
+
+   <form method='post'>
+    <input id='pw' name='token' placeholder='Insert here your token' type='password'/><br>
+    <br><input type='submit' value='Sign in' onclick="send_submission()">
+   </form>
+   <a class='forgot' href="{{ url_for('auth.register') }}">Not registered yet?</a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"_init_edges": {"edges": [["0x400558", "0x40056a"], ["0x400558", "0x400568"], ["0x400568", "0x40056a"]]}, "_init_bbs": {"0x400558": "0x400558: sub rsp, 8\n0x40055c: mov rax, qword ptr [rip + 0x200a85]\n0x400563: test rax, rax\n0x400566: je 0x40056a\n", "0x40056a": "0x40056a: add rsp, 8\n0x40056e: ret \n", "0x400568": "0x400568: call rax\n"}}

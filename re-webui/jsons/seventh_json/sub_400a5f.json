@@ -1,0 +1,1 @@
+{"sub_400a5f_edges": {"edges": []}, "sub_400a5f_bbs": {"0x400a5f": "0x400a5f: push rbp\n0x400a60: mov rbp, rsp\n0x400a63: mov rax, qword_202010\n0x400a6a: test rax, rax\n0x400a6d: sete al\n0x400a70: pop rbp\n0x400a71: ret \n"}}

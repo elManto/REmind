@@ -1,0 +1,1 @@
+{"sub_400ca4_edges": {"edges": []}, "sub_400ca4_bbs": {"0x400ca4": "0x400ca4: push rbp\n0x400ca5: mov rbp, rsp\n0x400ca8: mov dword ptr [rbp - 4], edi\n0x400cab: cmp dword ptr [rbp - 4], -1\n0x400caf: setne al\n0x400cb2: pop rbp\n0x400cb3: ret \n"}}

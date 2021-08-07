@@ -1,0 +1,1 @@
+{"bb2_bbs": {"0x400cb4": "mov dword [esp + 0xc], eax\nmov edx, dword [local_c4h]\nmov dword [esp + 0x8], edx\nmov ecx, dword [local_c0h]\nmov dword [esp], 0x008053a7\nmov dword [esp + 0x4], ecx\ncall 0x08050c10"}}

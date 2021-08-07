@@ -1,0 +1,251 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Re-Mind Demo</title>
+
+<link href="{{url_for('static', filename='prism.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='remind.css') }}" rel="stylesheet" />
+
+
+<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="{{url_for('static', filename='node_modules/dagre-d3/dist/dagre-d3.js') }}"></script>
+
+<!-- jQuery -->
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.scrollTo.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.layout-latest.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery-ui.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.ui-contextmenu.min.js' ) }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='./vendors/jquery.onoff.min.js' ) }}"></script>
+
+<script src="{{ url_for('static', filename='prism2_second_chall.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'second_chall.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'globalVariables.js') }}"></script>
+
+<style>
+
+.cfgbutton {
+    background-color: transparent;
+    background:url("{{url_for('static', filename='./gear.png')}}") no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding-left: 50px;
+    vertical-align: middle;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #414141; color:white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+<body>
+
+    <div class="dropdown" style="float:right;">
+      <button class="cfgbutton"></button>
+      <div class="dropdown-content">
+       <a href="auth/logout">Logout</a>
+  </div>
+  </div>
+
+  <div class="mainw">
+      <br/>
+
+      {% if session['status_solutions']['1'] == 1 %}
+        <p>Already answered! Please go on with the <a href="{{ url_for('rev_webui.index') }}">other tasks</a> </p>
+      {% else %}
+      <div class="asm_links"><h1> Answer the following questions! </h1> </div>
+<hr style="height:2px;border:none;color:#333;background-color:#333;" />
+  <br/>
+ </div>
+ <div class="choice">
+
+     <form method="post">
+        <text>For each of the following triple basic blocks, choose the one you've already seen previously</text><br>
+       <div class="cfg"><br><br>
+
+                <svg width="1400" height="512">
+
+            <g><g class="output"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g class="node" id="0x400cb2" transform="translate(153.0078125,219)" style="opacity: 1;"><rect rx="5" ry="5" x="-153.0078125" y="-173.8984375" width="306.015625" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-143.0078125,-163.8984375)"><foreignObject width="286.0172119140625" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb2" class=" language-nasm"><span id="undefined" class="token generic">sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+inc </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+xor </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">]
+cmp </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x1</span></span><span id="undefined" class="token generic">
+jmp </span><span class="token number"><span id="undefined" class="token generic">0x00804122</span></span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb4" transform="translate(575.0234375,219)" style="opacity: 1;"><rect rx="5" ry="5" x="-153.0078125" y="-196.4453125" width="306.015625" height="392.890625" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-143.0078125,-186.4453125)"><foreignObject width="286.0172119140625" height="372.9000244140625"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb4" class=" language-nasm"><span id="undefined" class="token generic">add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x10</span></span><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">]
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x10</span></span><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0xf</span></span><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">]
+test </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">
+jne </span><span class="token number"><span id="undefined" class="token generic">0x00804098</span></span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb8" transform="translate(1050.0859375,219)" style="opacity: 1;"><rect rx="5" ry="5" x="-203.0546875" y="-219" width="406.109375" height="438" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-193.0546875,-209)"><foreignObject width="386.1171875" height="418"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb8" class=" language-nasm"><span id="undefined" class="token generic">and </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x3f</span></span><span id="undefined" class="token generic">
+movzx </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, byte [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edi</span></a><span id="undefined" class="token generic"> + </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">]
+mov byte [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebp</span></a><span id="undefined" class="token generic">], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">al</span></a><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">]
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">1</span></span><span id="undefined" class="token generic">
+cmp </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0xffffffff</span></span><span id="undefined" class="token generic">
+mov dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+jne </span><span class="token number"><span id="undefined" class="token generic">0x00804268</span></span></code></pre></div></foreignObject></g></g></g></g></g></g></svg>
+
+         </div>
+
+            <input type="radio" name="bb0" value="1" /> basic block 1<br>
+            <input type="radio" name="bb0" value="2" /> basic block 2<br>
+            <input type="radio" name="bb0" value="3" /> basic block 3<br>
+          <br><br>
+         <hr>
+         <div class="cfg"><br><br>
+
+              <svg width="1400" height="512">
+                  <g><g class="output"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g class="node" id="0x400cb4" transform="translate(145.8515625,219)" style="opacity: 1;"><rect rx="5" ry="5" x="-145.8515625" y="-173.8984375" width="291.703125" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-135.8515625,-163.8984375)"><foreignObject width="271.7171630859375" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb4" class=" language-nasm"><span id="undefined" class="token generic">push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebp</span></a><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebp</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x18</span></span><span id="undefined" class="token generic">
+and </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0xfffffff0</span></span><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0</span></span><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0xf</span></span><span id="undefined" class="token generic">
+</span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb6" transform="translate(600.0234375,219)" style="opacity: 1;"><rect rx="5" ry="5" x="-160.15625" y="-173.8984375" width="320.3125" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-150.15625,-163.8984375)"><foreignObject width="300.31719970703125" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb6" class=" language-nasm"><span id="undefined" class="token generic">mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebp</span></a><span id="undefined" class="token generic">, dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic">]
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">1</span></span><span id="undefined" class="token generic">
+lea </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, [arg_1h]
+ mov dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic">], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x6</span></span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb8" transform="translate(1075.0234375,219)" style="opacity: 1;"><rect rx="5" ry="5" x="-195.90625" y="-173.8984375" width="391.8125" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-185.90625,-163.8984375)"><foreignObject width="371.81719970703125" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb8" class=" language-nasm"><span id="undefined" class="token generic">mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edi</span></a><span id="undefined" class="token generic">, dword </span><a ondblclick="rename('<span id=undefined class='token generic' >[esp + 0x8]</span>');" href="#"><span class="token local"><span id="undefined" class="token generic">[esp + 0x8]</span></span></a><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic">, dword </span><a ondblclick="rename('<span id=undefined class='token generic' >[esp + 0x4]</span>');" href="#"><span class="token local"><span id="undefined" class="token generic">[esp + 0x4]</span></span></a><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">]
+push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic">
+push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edi</span></a></code></pre></div></foreignObject></g></g></g></g></g></g></svg>
+
+         </div>
+          <input type="radio" name="bb1" value="1" /> basic block 1<br>
+            <input type="radio" name="bb1" value="2" /> basic block 2<br>
+            <input type="radio" name="bb1" value="3" /> basic block 3<br>
+            <br><br>
+            <hr>
+
+         <div class="cfg"><br><br>
+      <svg width="1400" height="512">
+
+             <g><g class="output"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g class="node" id="0x400cb0" transform="translate(110.1015625,196.4453125)" style="opacity: 1;"><rect rx="5" ry="5" x="-110.1015625" y="-196.4453125" width="220.203125" height="392.890625" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-100.1015625,-186.4453125)"><foreignObject width="200.21719360351562" height="372.9000244140625"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb0" class=" language-nasm"><span id="undefined" class="token generic">pop </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">
+pop </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+xor </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+mov [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb2" transform="translate(625.2578125,196.4453125)" style="opacity: 1;"><rect rx="5" ry="5" x="-203.0546875" y="-196.4453125" width="406.109375" height="392.890625" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-193.0546875,-186.4453125)"><foreignObject width="386.1171875" height="372.9000244140625"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb2" class=" language-nasm"><span id="undefined" class="token generic">add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x4d</span></span><span id="undefined" class="token generic">
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic"> </span><span class="token number"><span id="undefined" class="token generic">0x1c</span></span><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic">, dword [local_30h]
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edi</span></a><span id="undefined" class="token generic">, dword [local_34h]
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic"> + </span><span class="token number"><span id="undefined" class="token generic">0x28</span></span><span id="undefined" class="token generic">]
+add dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic"> + </span><span class="token number"><span id="undefined" class="token generic">0x20</span></span><span id="undefined" class="token generic">], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+add dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic"> + </span><span class="token number"><span id="undefined" class="token generic">0x24</span></span><span id="undefined" class="token generic">], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">
+</span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb4" transform="translate(1050.3671875,196.4453125)" style="opacity: 1;"><rect rx="5" ry="5" x="-203.0546875" y="-196.4453125" width="406.109375" height="392.890625" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-193.0546875,-186.4453125)"><foreignObject width="386.1171875" height="372.9000244140625"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb4" class=" language-nasm"><span id="undefined" class="token generic">mov dword </span><a ondblclick="rename('<span id=undefined class='token generic' >[esp + 0xc]</span>');" href="#"><span class="token local"><span id="undefined" class="token generic">[esp + 0xc]</span></span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">, dword [local_c4h]
+mov dword </span><a ondblclick="rename('<span id=undefined class='token generic' >[esp + 0x8]</span>');" href="#"><span class="token local"><span id="undefined" class="token generic">[esp + 0x8]</span></span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, dword [local_c0h]
+mov dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">], </span><span class="token number"><span id="undefined" class="token generic">0x008053a7</span></span><span id="undefined" class="token generic">
+mov dword </span><a ondblclick="rename('<span id=undefined class='token generic' >[esp + 0x4]</span>');" href="#"><span class="token local"><span id="undefined" class="token generic">[esp + 0x4]</span></span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+call </span><span class="token number"><span id="undefined" class="token generic">0x08050c10</span></span></code></pre></div></foreignObject></g></g></g></g></g></g></svg>
+         </div>
+
+         <input type="radio" name="bb2" value="1" /> basic block 1<br>
+            <input type="radio" name="bb2" value="2" /> basic block 2<br>
+            <input type="radio" name="bb2" value="3" /> basic block 3<br>
+            <br><br>
+
+        <hr>
+         <div class="cfg"><br><br>
+
+             <svg width="1400" height="512">
+
+             <g><g class="output"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g class="node" id="0x400cb0" transform="translate(203.0546875,196.4453125)" style="opacity: 1;"><rect rx="5" ry="5" x="-203.0546875" y="-173.8984375" width="406.109375" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-193.0546875,-163.8984375)"><foreignObject width="386.1171875" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb0" class=" language-nasm"><span id="undefined" class="token generic">lea </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">, [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic"> + </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic"> + </span><span class="token number"><span id="undefined" class="token generic">0x2c</span></span><span id="undefined" class="token generic">]
+push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+lea </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic"> - </span><span class="token number"><span id="undefined" class="token generic">0x2f20</span></span><span id="undefined" class="token generic">
+push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">
+call </span><span class="token number"><span id="undefined" class="token generic">0x00805262</span></span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb2" transform="translate(580.265625,196.4453125)" style="opacity: 1;"><rect rx="5" ry="5" x="-160.15625" y="-196.4453125" width="320.3125" height="392.890625" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-150.15625,-186.4453125)"><foreignObject width="300.31719970703125" height="372.9000244140625"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb2" class=" language-nasm"><span id="undefined" class="token generic">shl </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">3</span></span><span id="undefined" class="token generic">
+mov </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">edx</span></a><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">1</span></span><span id="undefined" class="token generic">
+lea </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic"> + </span><span class="token number"><span id="undefined" class="token generic">0x2c</span></span><span id="undefined" class="token generic">]
+inc </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ecx</span></a><span id="undefined" class="token generic">
+xor </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+test </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb4" transform="translate(1030.328125,196.4453125)" style="opacity: 1;"><rect rx="5" ry="5" x="-195.90625" y="-173.8984375" width="391.8125" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-185.90625,-163.8984375)"><foreignObject width="371.81719970703125" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb4" class=" language-nasm"><span id="undefined" class="token generic">add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x10</span></span><span id="undefined" class="token generic">
+sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x4</span></span><span id="undefined" class="token generic">
+mov dword [local_34h], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+xor </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">
+cmp dword [local_34h], </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">
+jne </span><span class="token number"><span id="undefined" class="token generic">0x00800982</span></span><span id="undefined" class="token generic">
+</span></code></pre></div></foreignObject></g></g></g></g></g></g></svg>
+
+         </div>
+         <input type="radio" name="bb3" value="1" /> basic block 1<br>
+            <input type="radio" name="bb3" value="2" /> basic block 2<br>
+            <input type="radio" name="bb3" value="3" /> basic block 3<br>
+            <br><br>
+
+            <hr>
+         <div class="cfg"><br><br>
+             <svg width="1400" height="512">
+
+             <g><g class="output"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g class="node" id="0x400cb4" transform="translate(102.953125,193.8984375)" style="opacity: 1;"><rect rx="5" ry="5" x="-102.953125" y="-173.8984375" width="205.90625" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-92.953125,-163.8984375)"><foreignObject width="185.91717529296875" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb4" class=" language-nasm"><span id="undefined" class="token generic">push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebp</span></a><span id="undefined" class="token generic">
+xor </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x20</span></span><span id="undefined" class="token generic">
+pop </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">
+xor </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0xf</span></span><span id="undefined" class="token generic">
+</span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb6" transform="translate(562.7578125,193.8984375)" style="opacity: 1;"><rect rx="5" ry="5" x="-145.8515625" y="-173.8984375" width="291.703125" height="347.796875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-135.8515625,-163.8984375)"><foreignObject width="271.7171630859375" height="327.800048828125"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb6" class=" language-nasm"><span id="undefined" class="token generic">sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">8</span></span><span id="undefined" class="token generic">
+push </span><span class="token number"><span id="undefined" class="token generic">0x1</span></span><span id="undefined" class="token generic">
+push </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic">
+call </span><span class="token number"><span id="undefined" class="token generic">0x00800e64</span></span><span id="undefined" class="token generic">
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x10</span></span><span id="undefined" class="token generic">
+and </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0xffffffff</span></span></code></pre></div></foreignObject></g></g></g><g class="node" id="0x400cb8" transform="translate(984.6171875,193.8984375)" style="opacity: 1;"><rect rx="5" ry="5" x="-153.0078125" y="-151.34375" width="306.015625" height="302.6875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-143.0078125,-141.34375)"><foreignObject width="286.0172119140625" height="282.699951171875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><pre class=" language-nasm"><code id="0x400cb8" class=" language-nasm"><span id="undefined" class="token generic">sub </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">ebx</span></a><span id="undefined" class="token generic">
+shl </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x2</span></span><span id="undefined" class="token generic">
+xor </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a><span id="undefined" class="token generic">, dword [</span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esi</span></a><span id="undefined" class="token generic">]
+add </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">esp</span></a><span id="undefined" class="token generic">, </span><span class="token number"><span id="undefined" class="token generic">0x10</span></span><span id="undefined" class="token generic">
+pop </span><a href="#" ;<span="" class="token register variable"><span id="undefined" class="token generic">eax</span></a></code></pre></div></foreignObject></g></g></g></g></g></g></svg>
+         </div>
+
+         <input type="radio" name="bb4" value="1" /> basic block 1<br>
+            <input type="radio" name="bb4" value="2" /> basic block 2<br>
+            <input type="radio" name="bb4" value="3" /> basic block 3<br>
+            <br><br>
+
+         <input type="submit" value="submit"><br><br><br>
+
+     </form>
+ </div>
+
+    <script>
+        $('rect').css('y', -183.0078125);
+        $('rect').css('height', 400);
+        $('rect').css('width', 370);
+
+    </script>
+{% endif %}
+</body>
+
+<script>
+
+</script>
+
+</html>

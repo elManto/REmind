@@ -1,0 +1,133 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Re-Mind Demo</title>
+
+<link href="{{url_for('static', filename='prism.css') }}" rel="stylesheet" />
+<link href="{{url_for('static', filename='remind.css') }}" rel="stylesheet" />
+
+<style>
+
+.cfgbutton {
+    background-color: transparent;
+    background:url("{{url_for('static', filename='./gear.png')}}") no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding-left: 50px;
+    vertical-align: middle;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #414141; color:white;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+<body>
+
+    <div class="dropdown" style="float:right;">
+      <button class="cfgbutton"></button>
+      <div class="dropdown-content">
+       <a href="auth/logout">Logout</a>
+  </div>
+  </div>
+
+  <div class="mainw">
+      <br/>
+      <div class="asm_links"><h1> Welcome! </h1> </div>
+<hr style="height:2px;border:none;color:#333;background-color:#333;" />
+  <br/>
+ </div>
+ <div class="choice">
+	 <h3>Choose your chall:</h3>
+	 <ol>
+	 {% if session['experiment_mode'] == 0 %}
+         <li><a id="fourth_chall" href="fourth_chall/?function=main">newbie</a></li>
+	 <li><a id="fifth_chall" href="fifth_chall/?function=_start">gettingreal (1 pt)</a></li> 
+	 	{% if session['solves'] >= 2 %}
+         <li><a id="first_chall" href="first_chall/?function=MAIN">Homework 1 (2 pt)</a></li>
+	 <li><a id="seventh_chall" href="seventh_chall/?function=main">Homework 2 (2 pt)</a></li>
+	 	{% endif %}
+	 {% else %}
+         <li><a id="fourth_chall" href="fourth_chall/?function=main">Warmup</a></li>
+	 <li><a id="first_chall" href="first_chall/?function=MAIN">Test 1</a></li>
+	 <li><a id="seventh_chall" href="seventh_chall/?function=main">Test 2</a></li>
+	 {% endif %}
+	 </ol>
+     <h3>Task</h3>
+        <p style='margin-right:80px'>
+            Your task consists in analysing the binary and finding the needed input to get the string 'Congratulations' or 'Success!'. For solving such a task,
+            you can use all the features implemented in our framework (see section below). When you find the solution, you can submit it by clicking on "Submit Solution". 
+            (top corner on the right).
+	    <br><br>
+	    You will find 3 challenges, but the first one, <b>Warmup </b> is not important for the experiment, and you should use it just for getting more comfortable with the tool. 
+	    For this reason, solving <b>Warmup</b> is OPTIONAL. 
+	    <br><br>
+	    The other 2 challenges are the core part of the test. They can be stopped even if we believe that solving it without interruptions is the best thing for both you and us.
+	    <br><br>
+	    <b>Note that for the two tests (Test 1 and Test 2), solution is not required in a specific format (like the flags in a CTF), but it is supposed to be a short description in your own words (just 1 or 2 lines) or a command line that make the correct fuction to print 'Congratulations' or 'Success!'.</b>
+        </p>
+	 <h3>How to use the webui?</h3>
+	 <p style='margin-right:80px'>
+        This webui allows you to analyse and reverse some binaries providing some basic features you can find in typical RE tools (IDA, radare2, ...).<br>
+        <ul>
+            <li>Mouse right-click: it opens a context-menu with the following voices</li>
+            <ul>
+                <li>Rename variables</li>
+                <li>Jump to</li>
+                <li>Comment</li>
+                <li>Follow an address</li>
+                <li>Rename functions</li>
+            </ul>
+            <li>Double click over addresses: it follow the dbl-clicked address (if it is a jmp or a call or something similar)</li>
+            <li>Keyboard Shortcut</li>
+            <ul>
+                <li>'c'     - comment</li>
+                <li>'r'     - rename variable</li>
+                <li>'Esc'   - jumps back (you can use if after using double click or following an address)</li>
+            </ul>
+            <li>For each function, you can see xrefs (both to and from) in the functions list (the tab on the left)</li>
+            <li>You can access some useful information such as the strings (and their xrefs), the executable info and the callgraph by simply clicking on the related tabs
+                you can find on top of the view</li>
+        </ul>
+     </p>
+
+     <script>
+    localStorage.removeItem("myFunctionHistory")
+    var foo = localStorage.getItem("function");
+    var addr = localStorage.getItem("addr");
+    var chall_id = localStorage.getItem("lastChallId")
+    if (foo && foo != "None") {
+        document.getElementById(chall_id).href= chall_id + "/?function=" + foo;
+     }
+     if (addr && addr != "None")
+        document.getElementById(chall_id).href += "&&addr=" + addr;
+</script>
+
+
+</body>
+
+
+</html>

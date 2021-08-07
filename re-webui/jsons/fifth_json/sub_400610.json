@@ -1,0 +1,1 @@
+{"sub_400610_edges": {"edges": []}, "sub_400610_bbs": {"0x400610": "0x400610: push qword ptr [rip + 0x20098a]\n0x400616: jmp qword ptr [rip + 0x20098c]\n"}}
